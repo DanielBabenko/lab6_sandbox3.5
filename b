@@ -1,0 +1,11 @@
+add
+Cool
+5
+67
+Me
+145
+2000-12-12
+orange
+7
+7
+easy
