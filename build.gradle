@@ -18,7 +18,7 @@ repositories {
 configurations.implementation.canBeResolved(true)
 
 jar {
-    jar.baseName("Lab5")
+    jar.baseName("Lab6")
     manifest {
         attributes(
                 'Main-Class': 'App'
