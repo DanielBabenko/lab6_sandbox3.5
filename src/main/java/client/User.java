@@ -22,6 +22,8 @@ public class User {
 
     private byte[] receivingDataBuffer;
 
+    private List<String> files = new ArrayList<>();
+
     private SendObject sendObject;
 
     public User(String host, int port) {
@@ -67,7 +69,7 @@ public class User {
     }
 
     public static void main(String[] args) throws IOException {
-        User sender = new User("localhost", 59056);
+        User sender = new User("localhost", 59072);
         sender.setSocket(new DatagramSocket());
         BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
         boolean flag = false;
@@ -99,12 +101,17 @@ public class User {
     }
 
     public void executeScript(String pathToFile) throws IOException, ClassNotFoundException {
-        pathToFile = System.getProperty("user.dir") + "/" + pathToFile;
-        System.out.println(pathToFile);
         if (new File(pathToFile).exists()) {
             // настраиваем поток ввода
             BufferedReader buff = new BufferedReader(new InputStreamReader(new FileInputStream(pathToFile)));
             List<String> scriptCommands = new ArrayList<>();
+            for (String f: files){
+                if (pathToFile.equals(f)){
+                    sendExitMessage(" ");
+                }
+            }
+            files.add(pathToFile);
+
             String s = buff.readLine();
             while(s != null){
                 scriptCommands.add(s);
@@ -112,12 +119,21 @@ public class User {
             }
 
             for(String command:scriptCommands){
-                sendMessage(command);
+                String[] ex = command.split(" ",2);
+                if (ex[0].equals("execute_script")) {
+                    executeScript(ex[1]);
+                    }
+                else
+                {
+                    sendMessage(command);
+                }
             }
 
         } else {
             sendMessage(" ");
         }
+
+        files.clear();
     }
 
     private void sendLabWorkObject() throws IOException {

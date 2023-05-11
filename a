@@ -1,4 +1,6 @@
 help
 show
 info
+pipa
 remove_by_id 5
+execute_script c
