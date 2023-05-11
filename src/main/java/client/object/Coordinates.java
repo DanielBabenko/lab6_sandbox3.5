@@ -1,8 +1,8 @@
 package client.object;
 
 
-import exceptions.InvalidFieldY;
-import exceptions.NullX;
+import client.exceptions.InvalidFieldY;
+import client.exceptions.NullX;
 
 import java.io.Serializable;
 
