@@ -67,7 +67,7 @@ public class User {
     }
 
     public static void main(String[] args) throws IOException {
-        User sender = new User("localhost", 59048);
+        User sender = new User("localhost", 59056);
         sender.setSocket(new DatagramSocket());
         BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
         boolean flag = false;
@@ -85,8 +85,9 @@ public class User {
                     String[] arr = message.split(" ",2);
                     if (arr[0].equals("execute_script")) {
                         sender.executeScript(arr[1]);
+                    } else {
+                        sender.sendMessage(message);
                     }
-                    sender.sendMessage(message);
                 }
             }
         } catch (ClassNotFoundException e) {

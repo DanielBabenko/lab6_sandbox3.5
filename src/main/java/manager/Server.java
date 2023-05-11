@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Server {
 
-    private final static int PORT = 59048;
+    private final static int PORT = 59056;
     DatagramSocket serverSocket;
     private Root root;
     private  String fileName;
